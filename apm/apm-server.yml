@@ -1,0 +1,21 @@
+# ========================= APM Server Configuration =========================
+
+# Saída: envia dados para o Elasticsearch
+output.elasticsearch:
+  hosts: ["http://elasticsearch:9200"]
+
+# Setup do Kibana (para dashboards, integração, etc.)
+setup.kibana:
+  host: "http://kibana:5601"
+
+# Configurações do servidor APM
+apm-server:
+  host: "0.0.0.0:8200"
+
+# Ativa o ILM (Index Lifecycle Management)
+setup.ilm.enabled: auto
+setup.template.enabled: true
+
+# Logs do APM Server
+logging.level: info
+logging.to_files: false

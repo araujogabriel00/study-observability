@@ -1,0 +1,43 @@
+metricbeat.modules:
+- module: docker
+  metricsets: ["container", "cpu", "diskio", "event", "healthcheck", "image", "info", "memory", "network"]
+  hosts: ["unix:///var/run/docker.sock"]
+  period: 10s
+
+- module: elasticsearch
+  metricsets: ["node", "node_stats", "cluster_stats", "index"]
+  period: 10s
+  hosts: ["http://elasticsearch:9200"]
+
+output.elasticsearch:
+  hosts: ["http://elasticsearch:9200"]
+
+setup.kibana:
+  host: "http://kibana:5601"
+
+setup.dashboards.enabled: true
+
+#GitHub Copilot: Claro! Esse arquivo metricbeat.yml é o arquivo de configuração do **Metricbeat**, um dos Beats do Elastic Stack. O Metricbeat coleta métricas do sistema operacional e envia para o Elasticsearch ou outro destino configurado.
+
+#Veja o que cada parte faz:
+
+#- **metricbeat.modules**:  
+ # Define quais módulos e conjuntos de métricas o Metricbeat irá coletar.  
+  #Neste caso:
+  #- **module: system**: Coleta métricas do sistema operacional.
+  #- **metricsets**: Lista de métricas coletadas:
+   # - `cpu`: Uso da CPU.
+    # - `memory`: Uso de memória.
+    # - `network`: Estatísticas de rede.
+  #- **period: 10s**: As métricas são coletadas a cada 10 segundos.
+
+#- **output.elasticsearch**:  
+ # Define para onde os dados coletados serão enviados.
+  #- **hosts**: O endereço do Elasticsearch onde as métricas serão armazenadas (`http://elasticsearch:9200`).
+
+#- **setup.kibana**:  
+ # Configura o acesso ao Kibana para facilitar a visualização dos dashboards.
+  #- **host**: Endereço do Kibana (`http://kibana:5601`).
+
+#**Resumo:**  
+#Esse arquivo configura o Metricbeat para coletar métricas básicas do sistema operacional a cada 10 segundos e enviar para um servidor Elasticsearch, com integração ao Kibana para visualização dos dados.
